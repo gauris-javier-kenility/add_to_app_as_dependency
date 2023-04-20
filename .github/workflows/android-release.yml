@@ -9,6 +9,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.version }}
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v3
@@ -26,6 +28,15 @@ jobs:
         with:
           flutter-version: '3.7.12'
       
+      - name: Check a new tag
+        id: tag
+        run: |
+          export TAG_VERSION=$(grep version pubspec.yaml |  awk -F  ': ' '{print $2}')
+          echo "version=$TAG_VERSION" >> $GITHUB_OUTPUT
+          echo $TAG_VERSION
+          git tag $TAG_VERSION
+          git push origin $TAG_VERSION
+
       - name: 'Flutter Build AAR'
         run: |
           flutter build aar
