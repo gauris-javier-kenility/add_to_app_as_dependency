@@ -6,12 +6,11 @@ on:
   pull_request:
     branches: [ "master" ]
 
-
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Flutter Build AAR'
+      - name: 'Flutter Build AAR - Test'
         run: |
           flutter build aar
           
