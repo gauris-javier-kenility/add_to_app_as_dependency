@@ -1,0 +1,26 @@
+name: Android Release
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  publish:
+      - name: 'Flutter Build AAR'
+        run: |
+          flutter build aar
+
+      - name: 'Append publish gradle script'
+        run: |
+          cat publish.gradle >> .android/build.gradle
+
+      - name: 'Flutter Build AAR'
+        run: |
+          flutter build aar --no-debug --no-profile --build-number ${{ steps.vars.outputs.tag }}
+        env:
+          GITHUB_USER: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
