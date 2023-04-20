@@ -9,5 +9,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    steps:
+      - name: 'Flutter Build AAR'
+        run: |
+          flutter build aar
           
 
