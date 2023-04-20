@@ -10,6 +10,16 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+     - name: 'Setup Dart'
+        uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: 2.18.2
+
+      - name: 'Setup Flutter'
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.7.7'
+      
       - name: 'Flutter Build AAR - Test'
         run: |
           flutter build aar
