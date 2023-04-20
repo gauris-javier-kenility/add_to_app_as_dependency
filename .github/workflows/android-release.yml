@@ -8,17 +8,10 @@ on:
 
 jobs:
   publish:
-    name: 'Flutter Build AAR'
-      run: |
-        flutter build aar
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Flutter Build AAR'
+        run: |
+          flutter build aar
+          
 
-    - name: 'Append publish gradle script'
-      run: |
-          cat publish.gradle >> .android/build.gradle
-
-    - name: 'Flutter Build AAR'
-      run: |
-          flutter build aar --no-debug --no-profile --build-number ${{ steps.vars.outputs.tag }}
-      env:
-        GITHUB_USER: ${{ github.actor }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
