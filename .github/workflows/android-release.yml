@@ -8,7 +8,7 @@ on:
 
 jobs:
   publish:
-    - name: 'Flutter Build AAR'
+    name: 'Flutter Build AAR'
       run: |
         flutter build aar
 
